@@ -7,7 +7,7 @@ This code was heavily influenced by [Mike Bostock's][bostock] [Scatterplots][bos
 
 ## API
 
-<a href="">#</a> d3.++bspGeoJson**(_collection_, _options_)
+<a href="">#</a> d3.**bspGeoJson**(_collection_, _options_)
 
 Create a bivariate scatter plot (BSP) that compares two properties of the [Features][geojsonf] in a [Feature Collection][geojsonfc]. Returns a reference to the D3 selection for the appended SVG with two additional functions described below.
 
