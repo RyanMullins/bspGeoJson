@@ -1,0 +1,30 @@
+{
+  "name": "bspGeoJson",
+  "version": "1.0.0",
+  "description": "Bivariate Scatter Plots from GeoJSON Feature Collections",
+  "main": "d3.bspGeoJson.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RyanMullins/bspGeoJson.git"
+  },
+  "keywords": [
+    "geojson",
+    "d3",
+    "bivariate",
+    "scatter",
+    "plots"
+  ],
+  "author": "Ryan S Mullins",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/RyanMullins/bspGeoJson/issues"
+  },
+  "homepage": "https://github.com/RyanMullins/bspGeoJson",
+  "devDependencies": {
+    "jshint": "^2.5.0",
+    "uglify-js": "^2.4.13"
+  }
+}
