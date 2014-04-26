@@ -38,11 +38,11 @@ The _options_ parameter is required and allows you to define the following prope
 * _name2_ : [String] A more readable label that is used for the y-axis.
 * _linker_ : [Function] Details to come...
 
-<a href="">#</a> bspGeoJson.updateVariables(_var1_, _var2_)
+<a href="">#</a> bspGeoJson.**updateVariables**(_var1_, _var2_)
 
 Updates the BSP to compare two different properties of the [Features][geojsonf] in a [Feature Collection][geojsonfc]. 
 
-<a href="">#</a> bspGeoJson.updateVariablesWithNames(_var1_, _name1_, _var2_, _name2_)
+<a href="">#</a> bspGeoJson.**updateVariablesWithNames**(_var1_, _name1_, _var2_, _name2_)
 
 Updates the BSP to compare two different properties of the [Features][geojsonf] in a [Feature Collection][geojsonfc] including more readable names.
 
