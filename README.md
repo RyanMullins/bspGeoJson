@@ -57,8 +57,8 @@ Details to come.
 <html lang="en">
 <head>
   <script src="//d3.v3.min.js" charset="utf-8"></script>
-  <script src="//d3.pcpGeoJson.min.js"></script>
-  <link href="//d3.pcpGeoJson.css" rel='stylesheet' />
+  <script src="//d3.bspGeoJson.min.js"></script>
+  <link href="//d3.bspGeoJson.css" rel='stylesheet' />
 </head>
 <body>
   <script type="text/javascript">
