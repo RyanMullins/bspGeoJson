@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Bspgeojson by RyanMullins</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Bspgeojson</h1>
+        <p>Creates a bivariate scatter plot from a GeoJSON Feature Collection</p>
+
+        <p class="view"><a href="https://github.com/RyanMullins/bspGeoJson">View the Project on GitHub <small>RyanMullins/bspGeoJson</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/RyanMullins/bspGeoJson/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/RyanMullins/bspGeoJson/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/RyanMullins/bspGeoJson">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="bivariate-scatter-plots-for-geojson-feature-collections" class="anchor" href="#bivariate-scatter-plots-for-geojson-feature-collections"><span class="octicon octicon-link"></span></a>Bivariate Scatter Plots for GeoJSON Feature Collections</h1>
+
+<p>This is an extremely simple plug-in for D3 that generates an SVG-based bivariate scatter plot for a <a href="http://geojson.org/">GeoJSON</a> <a href="http://geojson.org/geojson-spec.html#feature-collection-objects">Feature Collection</a>. </p>
+
+<p>This code was heavily influenced by <a href="http://bost.ocks.org/mike/">Mike Bostock's</a> <a href="http://bl.ocks.org/mbostock/3887118">Scatterplots</a> example. In fact, you might even say I just straight-up copied the code and changed it to meet my needs. Because, that's exactly what I did. Thank you, Mike, for this example. </p>
+
+<h2>
+<a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h2>
+
+<p><a href="">#</a> d3.<strong>bspGeoJson</strong>(<em>collection</em>, <em>options</em>)</p>
+
+<p>Create a bivariate scatter plot (BSP) that compares two properties of the <a href="http://geojson.org/geojson-spec.html#feature-objects">Features</a> in a <a href="http://geojson.org/geojson-spec.html#feature-collection-objects">Feature Collection</a>. Returns a reference to the D3 selection for the appended SVG with two additional functions described below.</p>
+
+<p>The <em>collection</em> parameter is required and <strong>must</strong> be a GeoJSON Feature collection. Behavior is undefined if this parameter is not a Feature Collection.</p>
+
+<p>The <em>options</em> parameter is required and allows you to define the following properties. Properties that must be defined are listed in bold face. </p>
+
+<ul>
+<li>
+<em><strong>var1</strong></em> : [String] The property that will be mapped to the x-axis.</li>
+<li>
+<em><strong>var2</strong></em> : [String] The property that will be mapped to the y-axis.</li>
+<li>
+<em><strong>colorizer</strong></em> : [Function] Determines the color for each dot based the classification of each variable.</li>
+<li>
+<em><strong>classifier</strong></em> : [Function] Determines the class of a dot given a variable name and value.</li>
+<li>
+<em>id</em> : [String] The ID of the container for the BSP, defaults to 'body'</li>
+<li>
+<em>margin</em> : [Array] Array of numbers, must specify all; [top, right, bottom, left], defaults to [30, 10, 10, 10]</li>
+<li>
+<em>width</em> : [Number] Width of the plot, defaults to 400 pixels</li>
+<li>
+<em>height</em> : [Number] Height of the plot, defaults to 400 pixels. </li>
+<li>
+<em>radius</em> : [Number] Radius of each dot on the plot, defaults to 3.5px.</li>
+<li>
+<em>domainx</em> : [Array | String] Defines the domain of the x-axis
+
+<ul>
+<li>An array of length two defines the lower and upper bounds</li>
+<li>Using the string "max" defines the domain from 0 to the maximum value for that property in the collection, <a href="https://github.com/mbostock/d3/wiki/Quantitative-Scales#linear_nice">nice-ified</a>.</li>
+<li>All other values, including null, defines the domain as the extents of the property values in the collection, <a href="https://github.com/mbostock/d3/wiki/Quantitative-Scales#linear_nice">nice-ified</a>.</li>
+</ul>
+</li>
+<li>
+<em>domainy</em> : [Array | String] Defines the domain of the y-axis
+
+<ul>
+<li>An array of length two defines the lower and upper bounds</li>
+<li>Using the string "max" defines the domain from 0 to the maximum value for that property in the collection, <a href="https://github.com/mbostock/d3/wiki/Quantitative-Scales#linear_nice">nice-ified</a>.</li>
+<li>All other values, including null, defines the domain as the extents of the property values in the collection, <a href="https://github.com/mbostock/d3/wiki/Quantitative-Scales#linear_nice">nice-ified</a>.</li>
+</ul>
+</li>
+<li>
+<em>ticksx</em> : [Number] The number of tick marks along the x-axis.</li>
+<li>
+<em>ticksy</em> : [Number] The number of tick marks along the y-axis.</li>
+<li>
+<em>name1</em> : [String] A more readable label that is used for the x-axis.</li>
+<li>
+<em>name2</em> : [String] A more readable label that is used for the y-axis.</li>
+<li>
+<em>linker</em> : [Function] Details to come...</li>
+</ul><p><a href="">#</a> bspGeoJson.<strong>updateVariables</strong>(<em>var1</em>, <em>var2</em>)</p>
+
+<p>Updates the BSP to compare two different properties of the <a href="http://geojson.org/geojson-spec.html#feature-objects">Features</a> in a <a href="http://geojson.org/geojson-spec.html#feature-collection-objects">Feature Collection</a>. </p>
+
+<p><a href="">#</a> bspGeoJson.<strong>updateVariablesWithNames</strong>(<em>var1</em>, <em>name1</em>, <em>var2</em>, <em>name2</em>)</p>
+
+<p>Updates the BSP to compare two different properties of the <a href="http://geojson.org/geojson-spec.html#feature-objects">Features</a> in a <a href="http://geojson.org/geojson-spec.html#feature-collection-objects">Feature Collection</a> including more readable names.</p>
+
+<h3>
+<a name="linking-functionality" class="anchor" href="#linking-functionality"><span class="octicon octicon-link"></span></a>Linking Functionality</h3>
+
+<p>Details to come.</p>
+
+<h3>
+<a name="example-usage" class="anchor" href="#example-usage"><span class="octicon octicon-link"></span></a>Example Usage</h3>
+
+<div class="highlight highlight-HTML"><pre>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"en"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//d3.v3.min.js"</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//d3.bspGeoJson.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+  <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"//d3.bspGeoJson.css"</span> <span class="na">rel=</span><span class="s">'stylesheet'</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+  <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+    <span class="nx">d3</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="s1">'collection.json'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">,</span> <span class="nx">collection</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> 
+        <span class="k">return</span> <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span> 
+      <span class="p">}</span>
+
+      <span class="nx">d3</span><span class="p">.</span><span class="nx">bspGeoJson</span><span class="p">(</span><span class="nx">collection</span><span class="p">,</span> <span class="p">{</span>
+        <span class="s1">'var1'</span> <span class="o">:</span> <span class="s1">'gdp'</span><span class="p">,</span>
+        <span class="s1">'var2'</span> <span class="o">:</span> <span class="s1">'gnp'</span><span class="p">,</span>
+        <span class="s1">'classifier'</span> <span class="o">:</span> <span class="nx">classifier</span><span class="p">,</span>
+        <span class="s1">'colorizer'</span> <span class="o">:</span> <span class="nx">colorizer</span>
+      <span class="p">});</span>
+    <span class="p">})</span>
+
+    <span class="kd">function</span> <span class="nx">classifier</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">colorizer</span> <span class="p">(</span><span class="nx">cls1</span><span class="p">,</span> <span class="nx">cls2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">...</span>
+    <span class="p">}</span>
+
+  <span class="nt">&lt;/script&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+
+</pre></div>
+
+
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/RyanMullins">RyanMullins</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
